@@ -6,6 +6,11 @@ module.exports = {
 		path: './app',
 		filename: 'bundle.js'
 	},
+	'webpack-dev-server': {
+		options: {
+			historyApiFallback: true
+		}
+    },
 	module: {
 		loaders: [{
 			test: /\.js?$/, 

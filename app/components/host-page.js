@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { AddQuestion } from './questions/add-question-form.js';
 import { ShowQuestions } from './questions/show-questions.js';
 import { CurrentQuestion } from './questions/current-question.js';
+import { AddAnswer } from './answers/add-answer-form.js';
 
 let base = Rebase.createClass('https://family-feud-v2.firebaseio.com');
 
@@ -16,6 +17,7 @@ export class Host extends React.Component {
 		this.handleAddQuestion = this.handleAddQuestion.bind(this);
 		this.handleDeleteQuestion = this.handleDeleteQuestion.bind(this);
 		this.updateCurrentQuestion = this.updateCurrentQuestion.bind(this);
+		this.handleNewAnswer = this.handleNewAnswer.bind(this);
 		this.state = {
 			game: []
 		};
@@ -46,6 +48,28 @@ export class Host extends React.Component {
 		this.setState({
 			game: games.concat([newQuestion])
 		});
+	}
+
+	handleNewAnswer(answer){
+
+		var games = _.clone(this.state.game);
+
+		games.map((q) => {
+			if(q.currentQuestion){
+				console.log(_.isArray(q.answers));
+				if(_.isArray(q.answers)){
+					q.answers.push(answer);
+				} else {
+					q.answers = [];
+					q.answers.push(answer);
+				}
+			}
+		});
+
+		this.setState({
+			game: games
+		});
+
 	}
 
 	updateCurrentQuestion(question){
@@ -86,6 +110,7 @@ export class Host extends React.Component {
 				<AddQuestion handleForm={this.handleAddQuestion} />
 				<ShowQuestions questions={this.state.game} handleDelete={this.handleDeleteQuestion} newCurrentQuestion={this.updateCurrentQuestion} />
 				<CurrentQuestion questions={this.state.game} />
+				<AddAnswer handleForm={this.handleNewAnswer} />
 			</div>
 		);
 	}
