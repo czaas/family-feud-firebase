@@ -5,7 +5,7 @@ export class CurrentQuestion extends React.Component {
 	render() {
 		let currentQuestion = this.props.questions.map((q) => {
 			if(q.currentQuestion === true){
-				return <p>{q.q}</p>;
+				return <p key={q.id}>{q.q}</p>;
 			}
 		});
 

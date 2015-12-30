@@ -15,7 +15,8 @@ export class AddAnswer extends React.Component {
 		var newAnswer = {
 			answer: this.refs.answer.value,
 			points: this.refs.points.value,
-			id: newId
+			id: newId,
+			isVisible: false,
 		};
 
 		this.props.handleForm(newAnswer);

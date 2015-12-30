@@ -30,7 +30,7 @@ export class Audience extends React.Component {
 
 		let currentQuestion = this.state.game.map((q) => {
 			return (q.currentQuestion) ? 
-				<span>{q.q}</span> :
+				<span key={q.id}>{q.q}</span> :
 				null;
 		});
 
