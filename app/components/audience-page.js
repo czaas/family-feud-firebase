@@ -14,7 +14,7 @@ export class Audience extends React.Component {
 	}
 
 	componentDidMount(){
-		this.ref = base.syncState( 'games/test', {
+		this.ref = base.syncState( 'games/all-questions', {
 			context: this,
 			state: 'game',
 			asArray: true,

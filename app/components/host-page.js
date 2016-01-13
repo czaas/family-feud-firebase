@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 import { AddQuestion } from './questions/add-question-form.js';
 import { ShowQuestions } from './questions/show-questions.js';
-import { CurrentQuestion } from './questions/current-question.js';
 import { AddAnswer } from './answers/add-answer-form.js';
 import { ShowAnswers } from './answers/show-answers.js';
 
@@ -29,7 +28,7 @@ export class Host extends React.Component {
 	}
 
 	componentDidMount(){
-		this.ref = base.syncState( 'games/test', {
+		this.ref = base.syncState( 'games/all-questions', {
 			context: this,
 			state: 'game',
 			asArray: true,
@@ -159,7 +158,6 @@ export class Host extends React.Component {
 
 				<AddQuestion handleForm={this.handleAddQuestion} />
 				<ShowQuestions questions={this.state.game} handleDelete={this.handleDeleteQuestion} newCurrentQuestion={this.updateCurrentQuestion} />
-				<CurrentQuestion questions={this.state.game} />
 				<AddAnswer handleForm={this.handleNewAnswer} />
 				<ShowAnswers questions={this.state.game} toggleVisibility={this.toggleAnswerVisibility} handleDelete={this.deleteAnswer} />
 			</div>

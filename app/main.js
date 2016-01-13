@@ -6,14 +6,14 @@ import { Router, Route, IndexRoute } from 'react-router';
 import { Wrapper } from './components/wrapper.js';
 import { Host } from './components/host-page.js';
 import { Audience } from './components/audience-page.js';
-
-
+import { NewGame } from './components/new-game.js';
 
 ReactDom.render(
 	<Router history={createBrowserHistory()}>
 		<Route path="/" component={Wrapper}>
 			<IndexRoute component={Audience} />
 			<Route path="/host" component={Host} />
+			<Route path="/new-game" component={NewGame} />
 		</Route>
 	</Router>,
 	document.getElementById('main')

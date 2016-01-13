@@ -27,7 +27,6 @@ export class AddAnswer extends React.Component {
 	render() {
 		return (
 			<div>
-				<h3>Add Answer</h3>
 				<form onSubmit={this.handleForm} ref='newAnswerForm'>
 					<input type='text' ref='answer' placeholder='New Answer' />
 					<input type='number' ref='points' placeholder='Point value' />
