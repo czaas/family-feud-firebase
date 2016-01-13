@@ -6,7 +6,7 @@ export class Wrapper extends React.Component {
 		return (
 			<div>
 				<h1>Family Feud</h1>
-				<nav><Link to='/'>Audience</Link> <Link to='/host'>Host</Link> <Link to='/new-game'>New Game</Link></nav>
+				<nav><Link to='/'>Audience</Link> <Link to='/host'>Host</Link></nav>
 				<div>{this.props.children}</div>
 			</div>
 		);

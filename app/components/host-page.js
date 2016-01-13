@@ -6,6 +6,7 @@ import { AddQuestion } from './questions/add-question-form.js';
 import { ShowQuestions } from './questions/show-questions.js';
 import { AddAnswer } from './answers/add-answer-form.js';
 import { ShowAnswers } from './answers/show-answers.js';
+import { ResetGame } from './reset-game.js';
 
 let base = Rebase.createClass('https://family-feud-v2.firebaseio.com');
 
@@ -21,6 +22,8 @@ export class Host extends React.Component {
 		this.handleNewAnswer = this.handleNewAnswer.bind(this);
 		this.toggleAnswerVisibility = this.toggleAnswerVisibility.bind(this);
 		this.deleteAnswer = this.deleteAnswer.bind(this);
+
+		this.handleReset = this.handleReset.bind(this);
 
 		this.state = {
 			game: []
@@ -150,12 +153,26 @@ export class Host extends React.Component {
 		});
 	}
 
+	handleReset(){
+		var games = _.clone(this.state.game);
+
+		games.map((q) => {
+			q.currentQuestion = false;
+
+			q.answers.map( a => a.isVisible = false);
+		});
+
+		this.setState({
+			game: games
+		});
+	}
+
 	render() {
 
 		return (
 			<div>
 				<h2>Host</h2>
-
+				<a onClick={this.handleReset}>Reset Game</a>
 				<AddQuestion handleForm={this.handleAddQuestion} />
 				<ShowQuestions questions={this.state.game} handleDelete={this.handleDeleteQuestion} newCurrentQuestion={this.updateCurrentQuestion} />
 				<AddAnswer handleForm={this.handleNewAnswer} />

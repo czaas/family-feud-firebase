@@ -1,6 +1,8 @@
 import React from 'react';
 import Rebase from 're-base';
 
+import { ShowAnswersAudience } from './audience/answers.js';
+
 let base = Rebase.createClass('https://family-feud-v2.firebaseio.com');
 
 export class Audience extends React.Component {
@@ -27,17 +29,22 @@ export class Audience extends React.Component {
 
 
 	render() {
-
+		let currentAnswers = [];
 		let currentQuestion = this.state.game.map((q) => {
-			return (q.currentQuestion) ? 
-				<span key={q.id}>{q.q}</span> :
-				null;
+			if(q.currentQuestion) {
+					q.answers.map( a => currentAnswers.push(a));
+
+					return <span key={q.id}>{q.q}</span>;
+				} else {
+					return null;
+				}
 		});
 
 		return (
 			<div>
 				<h2>Audience</h2>
-				<p>{currentQuestion || 'No currentQuestion'}</p>
+				<p>Current Question: {currentQuestion || 'No currentQuestion'}</p>
+				<ShowAnswersAudience answers={currentAnswers} />
 			</div>
 		);
 	}

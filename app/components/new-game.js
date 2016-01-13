@@ -4,6 +4,7 @@ import $ from 'npm-zepto';
 import _ from 'lodash';
 
 let base = Rebase.createClass('https://family-feud-v2.firebaseio.com');
+let currentGame = 0;
 
 export class NewGame extends React.Component {
 
@@ -21,6 +22,8 @@ export class NewGame extends React.Component {
 	componentDidMount(){
 
 		let gameId = createGameId();
+		
+		currentGame = gameId;
 
 		this.ref = base.syncState( 'games/game-' + gameId, {
 			context: this,
@@ -59,8 +62,17 @@ export class NewGame extends React.Component {
 
 			gameTemplate.questions = data;
 
+			gameTemplate.questions.map((question) => {
+				question.currentQuestion = false;
+
+				question.answers.map((answer) => {
+					answer.isVisible = false;
+				});
+			});
+
 			this.setState({
-				vs: gameTemplate
+				vs: gameTemplate,
+				currentGame: currentGame,
 			});
 		});
 	}
@@ -72,7 +84,10 @@ export class NewGame extends React.Component {
 			<div>
 				<h2>New game</h2>
 
-				<strong onClick={this.startGame}>Start Game</strong>
+				<strong onClick={this.startGame}>Start Game</strong><br />
+				current Game: {this.state.currentGame}
+
+				
 			</div>
 		);
 	}
